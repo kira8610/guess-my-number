@@ -3,10 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Guess My Number</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <main>
+        <h1>Guess My Number</h1>
+        <p>Guess a random number between 1 and 10</p>
+        <p id="appMessage"></p>
+        <form id="guessForm">
+            <input type="number" id="numberInput">
+            <button type="submit">Submit guess</button>
+        </form>
+        <p>Instructions</p>
+        <ul>
+            <li>Enter your guess</li>
+            <li>See if your guess is too high or too low</li>
+            <li>Change your guess</li>
+            <li>The app will tell you when you are right, and how many guesses you had</li>
+        </ul>
+    </main>
     <script src="index.js"></script>
 </body>
 </html>
