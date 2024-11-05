@@ -1,8 +1,43 @@
+const rangeForm = document.getElementById("rangeForm");
+const firstNumber = document.getElementById("firstNumber");
+const secondNumber = document.getElementById("secondNumber");
+
 const numberInput = document.getElementById("numberInput");
 const guessForm = document.getElementById("guessForm");
 const appMessage = document.getElementById("appMessage");
-const numberChosen = getRandomNumber() // Generate a random number only once. If I put it in the guessForm, it'll get updated every time users submit something.
+
+let firstNumInRange;
+let secondNumInRange;
+let numberChosen;
+
 let count = 0;
+
+rangeForm.addEventListener("submit", event => {
+    event.preventDefault();
+
+    firstNumInRange = Number(firstNumber.value);
+    secondNumInRange = Number(secondNumber.value);
+
+    if (isNaN(firstNumInRange) || firstNumInRange <= 0 || !Number.isInteger(firstNumInRange)
+        || isNaN(secondNumInRange) || secondNumInRange <= 0 || !Number.isInteger(secondNumInRange)) {
+            appMessage.textContent = `Please enter positive whole numbers.`;
+    }
+
+    else if (firstNumInRange >= secondNumInRange) {
+        appMessage.textContent = `The first number should be less than the second number.`;
+    }
+
+    else {
+        count = 0; // Reset the count when a new range is set
+        numberChosen = getRandomNumber(firstNumInRange, secondNumInRange);
+        appMessage.textContent = `Range set! Now guess the number between ${firstNumInRange} and ${secondNumInRange}.`
+    }
+})
+
+function getRandomNumber(firstNumber, secondNumber) {
+    const randomNumber = Math.floor(Math.random() * (secondNumber - firstNumber + 1)) + firstNumber;
+    return randomNumber;
+}
 
 guessForm.addEventListener("submit", event => {
     event.preventDefault();
@@ -20,9 +55,3 @@ guessForm.addEventListener("submit", event => {
         appMessage.textContent = `Well done! It took you ${count} attempts to guess this number`;
     }           
 })
-
-function getRandomNumber() {
-    const randomNumber = Math.floor(Math.random() * 10) + 1;
-    return randomNumber;
-}
-
